@@ -1,20 +1,21 @@
+//date varible 
 var today = new Date();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0');
 let yyyy = today.getFullYear();
 var today = mm + '/' + dd + '/' + yyyy;
 
-
+//Api
 let apiKey = "3ac0d8db34de82819d13a9167239acc1";
 let searchBtn = $(".searchBtn");
 let searchInput = $(".searchInput");
 
-
+//City, weather, date and history variable 
 let cityNameEl = $(".cityName");
 let currentDateEl = $(".currentDate");
 let weatherIconEl = $(".weatherIcon");
 let searchHistoryEl = $(".historyItems");
-
+// weather variables 
 let tempEl = $(".temp");
 let humidityEl = $(".humidity");
 let windSpeedEl = $(".windSpeed");
@@ -46,13 +47,12 @@ function renderSearchHistory(cityName) {
     searchHistoryEl.empty();
     let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory"));
     for (let i = 0; i < searchHistoryArr.length; i++) {
-        // We put newListItem in loop because otherwise the text of the li element changes, rather than making a new element for each array index
         let newListItem = $("<li>").attr("class", "historyEntry");
         newListItem.text(searchHistoryArr[i]);
         searchHistoryEl.prepend(newListItem);
     }
 }
-
+//Displaying weather data 
 function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon, uvVal) {
     cityNameEl.text(cityName)
     currentDateEl.text(`(${today})`)
@@ -85,7 +85,7 @@ function getWeather(desiredCity) {
     .then(function(uvData) {
         if (JSON.parse(localStorage.getItem("searchHistory")) == null) {
             let searchHistoryArr = [];
-            // Keeps user from adding the same city to the searchHistory array list more than once
+        
             if (searchHistoryArr.indexOf(cityObj.cityName) === -1) {
                 searchHistoryArr.push(cityObj.cityName);
                 // store our array of searches and save 
@@ -100,10 +100,10 @@ function getWeather(desiredCity) {
             }
         }else{
             let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory"));
-            // Keeps user from adding the same city to the searchHistory array list more than once
+        //store and save search array 
             if (searchHistoryArr.indexOf(cityObj.cityName) === -1) {
                 searchHistoryArr.push(cityObj.cityName);
-                // store our array of searches and save 
+                
                 localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
                 let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
                 renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon, uvData.value);
@@ -145,7 +145,7 @@ function getWeather(desiredCity) {
 
 function createForecastCard(date, icon, temp, humidity) {
 
-    // HTML elements we will create to later
+    //weather forcast data 
     let fiveDayCardEl = $("<div>").attr("class", "five-day-card");
     let cardDate = $("<h3>").attr("class", "card-text");
     let cardIcon = $("<img>").attr("class", "weatherIcon");
