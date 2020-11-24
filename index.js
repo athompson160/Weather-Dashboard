@@ -14,3 +14,9 @@ let cityNameEl = $(".cityName");
 let currentDateEl = $(".currentDate");
 let weatherIconEl = $(".weatherIcon");
 let searchHistoryEl = $(".historyItems");
+
+let tempEl = $(".temp");
+let humidityEl = $(".humidity");
+let windSpeedEl = $(".windSpeed");
+let uvIndexEl = $(".uvIndex");
+let cardRow = $(".card-row");
