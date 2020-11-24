@@ -8,3 +8,9 @@ var today = mm + '/' + dd + '/' + yyyy;
 let apiKey = "3ac0d8db34de82819d13a9167239acc1";
 let searchBtn = $(".searchBtn");
 let searchInput = $(".searchInput");
+
+
+let cityNameEl = $(".cityName");
+let currentDateEl = $(".currentDate");
+let weatherIconEl = $(".weatherIcon");
+let searchHistoryEl = $(".historyItems");
